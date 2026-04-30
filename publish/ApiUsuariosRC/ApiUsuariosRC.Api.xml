@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiUsuariosRC.Api</name>
+    </assembly>
+    <members>
+        <member name="M:ApiUsuariosRC.Api.Controllers.BootstrapController.CreateInitialUser(ApiUsuariosRC.Entities.Dtos.CrearUsuarioRequestDto,System.Threading.CancellationToken)">
+            <summary>
+            Crea el primer usuario activo cuando la tabla Usuarios esta vacia.
+            </summary>
+        </member>
+        <member name="M:ApiUsuariosRC.Api.Controllers.UsuariosController.GetAll(ApiUsuariosRC.Entities.Dtos.PaginacionRequestDto,System.Threading.CancellationToken)">
+            <summary>
+            Obtiene usuarios paginados.
+            </summary>
+        </member>
+    </members>
+</doc>

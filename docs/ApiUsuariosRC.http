@@ -1,0 +1,83 @@
+@baseUrl = https://localhost:7238
+@numeroEmpleado = RC-M-EDVIAM-8X96-26-5Q4V
+@usuarioId = 1
+@usuarioAccionId = 1
+
+### Health check
+GET {{baseUrl}}/health
+
+### Crear primer usuario si la tabla Usuarios esta vacia
+POST {{baseUrl}}/api/bootstrap/usuario-inicial
+Content-Type: application/json
+
+{
+  "generoId": 1,
+  "nombres": "Eduardo Daniel",
+  "apellidoPaterno": "Villanueva",
+  "apellidoMaterno": "Amaro",
+  "correo": "evillanueva@gmail.com",
+  "activo": true,
+  "fechaNacimiento": "1996-11-16T00:00:00"
+}
+
+### Obtener usuarios paginados
+GET {{baseUrl}}/api/usuarios?pagina=1&tamanoPagina=25
+X-Numero-Empleado: {{numeroEmpleado}}
+
+### Buscar usuarios con historial
+POST {{baseUrl}}/api/usuarios/buscar
+Content-Type: application/json
+X-Numero-Empleado: {{numeroEmpleado}}
+
+{
+  "usuarioId": null,
+  "nombreOCorreo": "Eduardo",
+  "activo": true,
+  "fechaCreacion": null,
+  "pagina": 1,
+  "tamanoPagina": 25
+}
+
+### Crear usuario
+POST {{baseUrl}}/api/usuarios
+Content-Type: application/json
+X-Numero-Empleado: {{numeroEmpleado}}
+
+{
+  "generoId": 2,
+  "nombres": "Mariana",
+  "apellidoPaterno": "Ramirez",
+  "apellidoMaterno": "Santos",
+  "correo": "mariana.ramirez@example.com",
+  "activo": true,
+  "fechaNacimiento": "1998-04-22T00:00:00"
+}
+
+### Actualizar usuario
+PUT {{baseUrl}}/api/usuarios/{{usuarioId}}
+Content-Type: application/json
+X-Numero-Empleado: {{numeroEmpleado}}
+
+{
+  "usuarioAccionId": {{usuarioAccionId}},
+  "generoId": 1,
+  "nombres": "Eduardo Daniel",
+  "apellidoPaterno": "Villanueva",
+  "apellidoMaterno": "Amaro",
+  "correo": "evillanueva@gmail.com",
+  "activo": true,
+  "fechaNacimiento": "1996-11-16T00:00:00"
+}
+
+### Baja logica
+POST {{baseUrl}}/api/usuarios/{{usuarioId}}/baja
+Content-Type: application/json
+X-Numero-Empleado: {{numeroEmpleado}}
+
+{
+  "usuarioAccionId": {{usuarioAccionId}}
+}
+
+### Generos
+GET {{baseUrl}}/api/generos
+X-Numero-Empleado: {{numeroEmpleado}}

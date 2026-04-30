@@ -1,0 +1,160 @@
+{
+  "info": {
+    "name": "ApiUsuariosRC",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://localhost:7238"
+    },
+    {
+      "key": "numeroEmpleado",
+      "value": "RC-M-EDVIAM-8X96-26-5Q4V"
+    },
+    {
+      "key": "usuarioId",
+      "value": "1"
+    },
+    {
+      "key": "usuarioAccionId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health check",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/health"
+      }
+    },
+    {
+      "name": "Bootstrap usuario inicial",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/bootstrap/usuario-inicial",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"generoId\": 1,\n  \"nombres\": \"Eduardo Daniel\",\n  \"apellidoPaterno\": \"Villanueva\",\n  \"apellidoMaterno\": \"Amaro\",\n  \"correo\": \"evillanueva@gmail.com\",\n  \"activo\": true,\n  \"fechaNacimiento\": \"1996-11-16T00:00:00\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Obtener usuarios paginados",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Numero-Empleado",
+            "value": "{{numeroEmpleado}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/usuarios?pagina=1&tamanoPagina=25"
+      }
+    },
+    {
+      "name": "Buscar usuarios con historial",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Numero-Empleado",
+            "value": "{{numeroEmpleado}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/usuarios/buscar",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuarioId\": null,\n  \"nombreOCorreo\": \"Eduardo\",\n  \"activo\": true,\n  \"fechaCreacion\": null,\n  \"pagina\": 1,\n  \"tamanoPagina\": 25\n}"
+        }
+      }
+    },
+    {
+      "name": "Crear usuario",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Numero-Empleado",
+            "value": "{{numeroEmpleado}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/usuarios",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"generoId\": 2,\n  \"nombres\": \"Mariana\",\n  \"apellidoPaterno\": \"Ramirez\",\n  \"apellidoMaterno\": \"Santos\",\n  \"correo\": \"mariana.ramirez@example.com\",\n  \"activo\": true,\n  \"fechaNacimiento\": \"1998-04-22T00:00:00\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Actualizar usuario",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Numero-Empleado",
+            "value": "{{numeroEmpleado}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/usuarios/{{usuarioId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuarioAccionId\": {{usuarioAccionId}},\n  \"generoId\": 1,\n  \"nombres\": \"Eduardo Daniel\",\n  \"apellidoPaterno\": \"Villanueva\",\n  \"apellidoMaterno\": \"Amaro\",\n  \"correo\": \"evillanueva@gmail.com\",\n  \"activo\": true,\n  \"fechaNacimiento\": \"1996-11-16T00:00:00\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Baja logica",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Numero-Empleado",
+            "value": "{{numeroEmpleado}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/usuarios/{{usuarioId}}/baja",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuarioAccionId\": {{usuarioAccionId}}\n}"
+        }
+      }
+    },
+    {
+      "name": "Obtener generos",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Numero-Empleado",
+            "value": "{{numeroEmpleado}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/generos"
+      }
+    }
+  ]
+}

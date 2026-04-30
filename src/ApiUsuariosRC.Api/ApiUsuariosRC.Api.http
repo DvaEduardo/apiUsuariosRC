@@ -1,0 +1,89 @@
+@ApiUsuariosRC.Api_HostAddress = http://localhost:5110
+@NumeroEmpleadoActivo = RC-M-EJEMPP-0100-26-TEST
+
+POST {{ApiUsuariosRC.Api_HostAddress}}/api/usuarios
+Content-Type: application/json
+X-Numero-Empleado: {{NumeroEmpleadoActivo}}
+
+{
+  "generoId": 1,
+  "nombres": "Laura",
+  "apellidoPaterno": "Ramirez",
+  "apellidoMaterno": "Santos",
+  "correo": "laura.ramirez@demo.com",
+  "activo": true,
+  "fechaNacimiento": "1998-04-17"
+}
+
+###
+
+POST {{ApiUsuariosRC.Api_HostAddress}}/api/usuarios/generar
+Content-Type: application/json
+X-Numero-Empleado: {{NumeroEmpleadoActivo}}
+
+{
+  "cantidad": 5,
+  "generoId": 1
+}
+
+###
+
+GET {{ApiUsuariosRC.Api_HostAddress}}/api/generos
+Accept: application/json
+X-Numero-Empleado: {{NumeroEmpleadoActivo}}
+
+###
+
+POST {{ApiUsuariosRC.Api_HostAddress}}/api/generos
+Content-Type: application/json
+X-Numero-Empleado: {{NumeroEmpleadoActivo}}
+
+{
+  "genero": "No binario"
+}
+
+###
+
+GET {{ApiUsuariosRC.Api_HostAddress}}/api/usuarios
+Accept: application/json
+X-Numero-Empleado: {{NumeroEmpleadoActivo}}
+
+###
+
+POST {{ApiUsuariosRC.Api_HostAddress}}/api/usuarios/buscar
+Content-Type: application/json
+X-Numero-Empleado: {{NumeroEmpleadoActivo}}
+
+{
+  "nombreOCorreo": "laura",
+  "activo": true
+}
+
+###
+
+PUT {{ApiUsuariosRC.Api_HostAddress}}/api/usuarios/1
+Content-Type: application/json
+X-Numero-Empleado: {{NumeroEmpleadoActivo}}
+
+{
+  "usuarioAccionId": 99,
+  "generoId": 1,
+  "nombres": "Laura Fernanda",
+  "apellidoPaterno": "Ramirez",
+  "apellidoMaterno": "Santos",
+  "correo": "laura.fernanda@demo.com",
+  "activo": true,
+  "fechaNacimiento": "1998-04-17"
+}
+
+###
+
+POST {{ApiUsuariosRC.Api_HostAddress}}/api/usuarios/1/baja
+Content-Type: application/json
+X-Numero-Empleado: {{NumeroEmpleadoActivo}}
+
+{
+  "usuarioAccionId": 99
+}
+
+###
